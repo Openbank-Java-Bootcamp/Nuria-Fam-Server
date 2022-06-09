@@ -17,7 +17,7 @@ public class RoleController {
 
     @PostMapping("/roles/addtouser")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addRoleTOUser(@RequestBody @Valid RoleToUserDTO roleToUserDTO) {
+    public void addRoleToUser(@RequestBody @Valid RoleToUserDTO roleToUserDTO) {
         roleService.addRoleToUser(roleToUserDTO.getEmail(), roleToUserDTO.getRoleName());
     }
 }

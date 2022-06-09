@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -20,10 +21,8 @@ public class Plate {
     private String name;
     @NotEmpty(message = "Provide ingredients.")
     private String ingredients;
-    @NotEmpty(message = "Provide a price.")
+    @NotNull(message = "Provide a price.")
     private double price;
-    @NotEmpty(message = "Provide a category.")
-    private String category;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
@@ -31,5 +30,5 @@ public class Plate {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private PlateCategory plateCategory;
+    private PlateCategory category;
 }

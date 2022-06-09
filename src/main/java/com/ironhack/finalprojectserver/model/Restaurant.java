@@ -20,12 +20,12 @@ public class Restaurant {
     private Long id;
     @NotEmpty(message = "Provide a name.")
     private String name;
-    @Pattern(regexp = "^\\\\d{10}$",
+    @Pattern(regexp = "^\\d{9}$",
             message = "Phone should have 9 numbers.")
     private String phone;
     @Embedded
     @NotNull(message = "You must have a primary address")
-    private Address primaryAddress;
+    private Address address;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")

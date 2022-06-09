@@ -11,4 +11,5 @@ public class EmployeeDTO {
     private String name;
     private String phone;
     private String jobTitle;
+    private Long restaurantId;
 }

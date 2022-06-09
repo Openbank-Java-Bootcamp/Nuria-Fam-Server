@@ -17,7 +17,7 @@ public class Employee {
     private Long id;
     @NotEmpty(message = "Provide a name.")
     private String name;
-    @Pattern(regexp = "^\\\\d{10}$",
+    @Pattern(regexp = "^\\d{9}$",
             message = "Phone should have 9 numbers.")
     private String phone;
     @NotEmpty(message = "Provide a job title.")

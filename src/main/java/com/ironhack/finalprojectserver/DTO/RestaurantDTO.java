@@ -7,10 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlateDTO {
+public class RestaurantDTO {
     private String name;
-    private String ingredients;
-    private double price;
-    private Long restaurantId;
-    private Long category;
+    private String phone;
+    private String street;
+    private String city;
+    private String country;
+    private String postalCode;
+    private Long userId;
 }
