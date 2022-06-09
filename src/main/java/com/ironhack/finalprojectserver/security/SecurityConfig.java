@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 
@@ -45,6 +46,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/auth/login/**").permitAll();
         http.authorizeRequests().antMatchers("/auth/signup").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/api/restaurants").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/api/restaurants/{id}").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/api/platecategory").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/api/plates/{id}").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/api/plates/category/{id}").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/api/drinkcategory").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/api/drinks/{id}").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/api/drinks/category/{id}").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -39,6 +39,7 @@ public class EmployeeService implements EmployeeServiceInterface {
         newEmployee.setName(employee.getName());
         newEmployee.setPhone(employee.getPhone());
         newEmployee.setJobTitle(employee.getJobTitle());
+        newEmployee.setImage(employee.getImage());
         newEmployee.setRestaurant(restaurantRepository.findById(employee.getRestaurantId()).get());
         if (newEmployee.getId() != null) {
             Optional<Employee> employeeFromDB = employeeRepository.findById(newEmployee.getId());
@@ -54,6 +55,7 @@ public class EmployeeService implements EmployeeServiceInterface {
         newEmployee.setName(employee.getName());
         newEmployee.setPhone(employee.getPhone());
         newEmployee.setJobTitle(employee.getJobTitle());
+        newEmployee.setImage(employee.getImage());
         newEmployee.setRestaurant(restaurantRepository.findById(employee.getRestaurantId()).get());
         Employee employeeFromDB = employeeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found"));
         newEmployee.setId(employeeFromDB.getId());

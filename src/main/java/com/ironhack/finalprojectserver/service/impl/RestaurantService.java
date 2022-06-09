@@ -40,11 +40,12 @@ public class RestaurantService implements RestaurantServiceInterface {
 
     public Restaurant saveRestaurant(RestaurantDTO restaurant) {
         log.info("Saving a new restaurant");
-        Address address = new Address(restaurant.getStreet(), restaurant.getCity(), restaurant.getCountry(), restaurant.getPostalCode());
+        Address address = new Address(restaurant.getStreet(), restaurant.getNumber(), restaurant.getCity(), restaurant.getCountry());
         Restaurant newRestaurant = new Restaurant();
         newRestaurant.setName(restaurant.getName());
         newRestaurant.setPhone(restaurant.getPhone());
         newRestaurant.setAddress(address);
+        newRestaurant.setImage(restaurant.getImage());
         newRestaurant.setUser(userRepository.findById(restaurant.getUserId()).get());
         if (newRestaurant.getId() != null) {
             Optional<Restaurant> restaurantFromDB = restaurantRepository.findById(newRestaurant.getId());
@@ -56,11 +57,12 @@ public class RestaurantService implements RestaurantServiceInterface {
 
     public void updateRestaurant(Long id, RestaurantDTO restaurant) {
         log.info("Updating restaurant with id {}", id);
-        Address address = new Address(restaurant.getStreet(), restaurant.getCity(), restaurant.getCountry(), restaurant.getPostalCode());
+        Address address = new Address(restaurant.getStreet(), restaurant.getNumber(), restaurant.getCity(), restaurant.getCountry());
         Restaurant newRestaurant = new Restaurant();
         newRestaurant.setName(restaurant.getName());
         newRestaurant.setPhone(restaurant.getPhone());
         newRestaurant.setAddress(address);
+        newRestaurant.setImage(restaurant.getImage());
         newRestaurant.setUser(userRepository.findById(restaurant.getUserId()).get());
         Restaurant restaurantFromDB = restaurantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found"));
         newRestaurant.setId(restaurantFromDB.getId());

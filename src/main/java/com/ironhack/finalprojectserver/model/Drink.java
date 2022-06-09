@@ -22,6 +22,7 @@ public class Drink {
     private String information;
     @NotNull(message = "Provide a price.")
     private double price;
+    private String image;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "restaurant_id")

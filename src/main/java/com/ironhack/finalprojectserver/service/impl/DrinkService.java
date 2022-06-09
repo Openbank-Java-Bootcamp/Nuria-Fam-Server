@@ -41,6 +41,7 @@ public class DrinkService implements DrinkServiceInterface {
         newDrink.setName(drink.getName());
         newDrink.setInformation(drink.getInformation());
         newDrink.setPrice(drink.getPrice());
+        newDrink.setImage(drink.getImage());
         newDrink.setRestaurant(restaurantRepository.findById(drink.getRestaurantId()).get());
         newDrink.setCategory(drinkCategoryRepository.findById(drink.getCategory()).get());
         if (newDrink.getId() != null) {
@@ -57,6 +58,7 @@ public class DrinkService implements DrinkServiceInterface {
         newDrink.setName(drink.getName());
         newDrink.setInformation(drink.getInformation());
         newDrink.setPrice(drink.getPrice());
+        newDrink.setImage(drink.getImage());
         newDrink.setRestaurant(restaurantRepository.findById(drink.getRestaurantId()).get());
         newDrink.setCategory(drinkCategoryRepository.findById(drink.getCategory()).get());
         Drink drinkFromDB = drinkRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Drink not found"));

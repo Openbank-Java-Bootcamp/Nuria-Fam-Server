@@ -23,6 +23,7 @@ public class Restaurant {
     @Pattern(regexp = "^\\d{9}$",
             message = "Phone should have 9 numbers.")
     private String phone;
+    private String image;
     @Embedded
     @NotNull(message = "You must have a primary address")
     private Address address;

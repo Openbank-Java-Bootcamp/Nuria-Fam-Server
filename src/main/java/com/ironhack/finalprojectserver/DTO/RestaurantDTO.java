@@ -11,8 +11,10 @@ public class RestaurantDTO {
     private String name;
     private String phone;
     private String street;
+    private int number;
     private String city;
     private String country;
     private String postalCode;
+    private String image;
     private Long userId;
 }

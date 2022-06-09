@@ -22,6 +22,7 @@ public class Employee {
     private String phone;
     @NotEmpty(message = "Provide a job title.")
     private String jobTitle;
+    private String image;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "restaurant_id")

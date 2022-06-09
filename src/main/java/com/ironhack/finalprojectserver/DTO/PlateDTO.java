@@ -11,6 +11,7 @@ public class PlateDTO {
     private String name;
     private String ingredients;
     private double price;
+    private String image;
     private Long restaurantId;
     private Long category;
 }

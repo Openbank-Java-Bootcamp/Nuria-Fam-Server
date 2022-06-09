@@ -29,14 +29,16 @@ public class User {
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}",
             message = "Password must have at least 6 characters and contain at least one number, one lowercase, one uppercase letter and a special character.")
     private String password;
+    private String image;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Restaurant> restaurants; // One user can have many restaurants
 
-    public User(String name, String email, String password) {
+    public User(String name, String email, String password, String image) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.image = image;
     }
 }

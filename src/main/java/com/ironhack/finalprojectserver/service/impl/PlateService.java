@@ -42,6 +42,7 @@ public class PlateService implements PlateServiceInterface {
         newPlate.setName(plate.getName());
         newPlate.setIngredients(plate.getIngredients());
         newPlate.setPrice(plate.getPrice());
+        newPlate.setImage(plate.getImage());
         newPlate.setRestaurant(restaurantRepository.findById(plate.getRestaurantId()).get());
         newPlate.setCategory(plateCategoryRepository.findById(plate.getCategory()).get());
         if (newPlate.getId() != null) {
@@ -58,6 +59,7 @@ public class PlateService implements PlateServiceInterface {
         newPlate.setName(plate.getName());
         newPlate.setIngredients(plate.getIngredients());
         newPlate.setPrice(plate.getPrice());
+        newPlate.setImage(plate.getImage());
         newPlate.setRestaurant(restaurantRepository.findById(plate.getRestaurantId()).get());
         newPlate.setCategory(plateCategoryRepository.findById(plate.getCategory()).get());
         Plate plateFromDB = plateRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plate not found"));
