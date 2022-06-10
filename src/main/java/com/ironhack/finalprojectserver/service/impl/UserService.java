@@ -5,12 +5,14 @@ import com.ironhack.finalprojectserver.repository.*;
 import com.ironhack.finalprojectserver.service.interfaces.UserServiceInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,9 +38,31 @@ public class UserService implements UserServiceInterface, UserDetailsService {
         return userRepository.save(user);
     }
 
+    public User getUser(Long id) {
+        log.info("Fetching user with id {}", id);
+        return userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    }
+
     public List<User> getUsers() {
         log.info("Fetching all users");
         return userRepository.findAll();
+    }
+
+    public void updateUser(Long id, User userSignupDTO) {
+        log.info("Updating user with id {}", id);
+        User user = new User(userSignupDTO.getName(), userSignupDTO.getEmail(), userSignupDTO.getPassword(), userSignupDTO.getImage());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User userFromDB = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        user.setId(userFromDB.getId());
+        userRepository.save(user);
+    }
+
+    public void deleteUser(Long id) {
+        log.info("Deleting restaurant with id {}", id);
+        userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found"));
+        if (userRepository.findById(id).isPresent()) {
+            userRepository.deleteById(id);
+        }
     }
 
     @Override

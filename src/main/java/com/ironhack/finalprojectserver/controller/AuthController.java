@@ -34,9 +34,27 @@ public class AuthController {
     public String verifyToken(Authentication authentication) {
         String email = (String) authentication.getPrincipal();
         User userFromDb = userRepository.findByEmail(email);
-        UserVerifyDTO userVerifyDTO = new UserVerifyDTO(userFromDb.getName());
+        UserVerifyDTO userVerifyDTO = new UserVerifyDTO(userFromDb.getId(), userFromDb.getName(), userFromDb.getImage());
         Gson gson = new Gson();
         String userDetails = gson.toJson(userVerifyDTO);
         return userDetails;
+    }
+
+    @GetMapping("/users/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public User getUser(@PathVariable(name = "id") Long userId) {
+        return userService.getUser(userId);
+    }
+
+    @PutMapping("/users/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateUser(@PathVariable Long id, @RequestBody @Valid User user) {
+        userService.updateUser(id, user);
+    }
+
+    @DeleteMapping("/users/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }

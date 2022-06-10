@@ -8,5 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserVerifyDTO {
+    private Long id;
     private String name;
+    private String image;
 }
