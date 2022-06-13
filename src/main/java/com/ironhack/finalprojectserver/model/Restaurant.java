@@ -37,4 +37,6 @@ public class Restaurant {
     private List<DrinkCategory> drinks; // One restaurant can have many drinks categories
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Employee> employees; // One restaurant can have many employees
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private List<Rating> ratings; // One restaurant can have many ratings
 }

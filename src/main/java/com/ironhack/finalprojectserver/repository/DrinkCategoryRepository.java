@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface DrinkCategoryRepository extends JpaRepository<DrinkCategory, Long> {
-    @Query(value = "SELECT * FROM drink_category INNER JOIN Restaurant ON drink_category.restaurant_id = restaurant.id WHERE restaurant.id = :id GROUP BY drink_category.restaurant_id", nativeQuery = true)
+    @Query(value = "SELECT * FROM drink_category INNER JOIN Restaurant ON drink_category.restaurant_id = restaurant.id WHERE restaurant.id = :id", nativeQuery = true)
     List<DrinkCategory> findAllByRestaurant(@Param("id") Long id);
 }
