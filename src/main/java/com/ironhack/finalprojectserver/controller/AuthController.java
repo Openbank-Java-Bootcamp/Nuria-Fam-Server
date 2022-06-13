@@ -1,6 +1,7 @@
 package com.ironhack.finalprojectserver.controller;
 
 import com.google.gson.Gson;
+import com.ironhack.finalprojectserver.DTO.UserDTO;
 import com.ironhack.finalprojectserver.DTO.UserVerifyDTO;
 import com.ironhack.finalprojectserver.model.User;
 import com.ironhack.finalprojectserver.repository.UserRepository;
@@ -25,7 +26,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
-    public User saveUser(@RequestBody @Valid User user) {
+    public User saveUser(@RequestBody @Valid UserDTO user) {
         return userService.saveUser(user);
     }
 
@@ -34,7 +35,7 @@ public class AuthController {
     public String verifyToken(Authentication authentication) {
         String email = (String) authentication.getPrincipal();
         User userFromDb = userRepository.findByEmail(email);
-        UserVerifyDTO userVerifyDTO = new UserVerifyDTO(userFromDb.getId(), userFromDb.getName(), userFromDb.getImage());
+        UserVerifyDTO userVerifyDTO = new UserVerifyDTO(userFromDb.getId(), userFromDb.getName(), userFromDb.getImage(), userFromDb.getRole().getName());
         Gson gson = new Gson();
         String userDetails = gson.toJson(userVerifyDTO);
         return userDetails;
@@ -48,7 +49,7 @@ public class AuthController {
 
     @PutMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateUser(@PathVariable Long id, @RequestBody @Valid User user) {
+    public void updateUser(@PathVariable Long id, @RequestBody @Valid UserDTO user) {
         userService.updateUser(id, user);
     }
 

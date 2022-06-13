@@ -1,5 +1,6 @@
 package com.ironhack.finalprojectserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,8 +31,10 @@ public class User {
             message = "Password must have at least 6 characters and contain at least one number, one lowercase, one uppercase letter and a special character.")
     private String password;
     private String image;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Restaurant> restaurants; // One user can have many restaurants
 

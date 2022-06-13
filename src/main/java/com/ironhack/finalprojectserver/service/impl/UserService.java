@@ -1,7 +1,9 @@
 package com.ironhack.finalprojectserver.service.impl;
 
+import com.ironhack.finalprojectserver.DTO.UserDTO;
 import com.ironhack.finalprojectserver.model.*;
 import com.ironhack.finalprojectserver.repository.*;
+import com.ironhack.finalprojectserver.service.interfaces.RoleServiceInterface;
 import com.ironhack.finalprojectserver.service.interfaces.UserServiceInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +33,16 @@ public class UserService implements UserServiceInterface, UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public User saveUser(User userSignupDTO) {
+    @Autowired
+    private RoleServiceInterface roleService;
+
+    public User saveUser(UserDTO userSignupDTO) {
         log.info("Saving a new user {} inside of the database", userSignupDTO.getName());
         User user = new User(userSignupDTO.getName(), userSignupDTO.getEmail(), userSignupDTO.getPassword(), userSignupDTO.getImage());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        User newUser = userRepository.save(user);
+        roleService.addRoleToUser(userSignupDTO.getEmail(), userSignupDTO.getRole().toUpperCase());
+        return newUser;
     }
 
     public User getUser(Long id) {
@@ -48,7 +55,7 @@ public class UserService implements UserServiceInterface, UserDetailsService {
         return userRepository.findAll();
     }
 
-    public void updateUser(Long id, User userSignupDTO) {
+    public void updateUser(Long id, UserDTO userSignupDTO) {
         log.info("Updating user with id {}", id);
         User user = new User(userSignupDTO.getName(), userSignupDTO.getEmail(), userSignupDTO.getPassword(), userSignupDTO.getImage());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -74,9 +81,7 @@ public class UserService implements UserServiceInterface, UserDetailsService {
         } else {
             log.info("User is found in the database: {}", email);
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-            user.getRoles().forEach(role -> {
-                authorities.add(new SimpleGrantedAuthority(role.getName()));
-            });
+            authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
             return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
         }
     }

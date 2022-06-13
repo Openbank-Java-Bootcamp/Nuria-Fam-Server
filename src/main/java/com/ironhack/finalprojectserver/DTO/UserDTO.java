@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserVerifyDTO {
-    private Long id;
+public class UserDTO {
+    private String email;
+    private String password;
     private String name;
     private String image;
     private String role;

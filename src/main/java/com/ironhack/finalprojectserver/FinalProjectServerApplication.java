@@ -35,4 +35,12 @@ public class FinalProjectServerApplication {
 			}
 		};
 	}
+
+	@Bean
+	CommandLineRunner run(RoleService roleService) {
+		return args -> {
+				roleService.saveRole(new Role("USER"));
+				roleService.saveRole(new Role("OWNER"));
+		};
+	}
 }
