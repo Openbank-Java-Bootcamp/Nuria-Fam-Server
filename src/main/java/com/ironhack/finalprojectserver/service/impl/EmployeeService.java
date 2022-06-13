@@ -28,9 +28,9 @@ public class EmployeeService implements EmployeeServiceInterface {
         return employeeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found"));
     }
 
-    public List<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees(Long id) {
         log.info("Fetching all employees");
-        return employeeRepository.findAll();
+        return employeeRepository.findAllByRestaurant(id);
     }
 
     public Employee saveEmployee(EmployeeDTO employee) {

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EmployeeServiceInterface {
     Employee getEmployee(Long id);
-    List<Employee> getAllEmployees();
+    List<Employee> getAllEmployees(Long id);
     Employee saveEmployee(EmployeeDTO employee);
     void updateEmployee(Long id, EmployeeDTO employee);
     void deleteEmployee(Long id);
