@@ -26,10 +26,6 @@ public class Plate {
     private String image;
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant;
-    @JsonIgnore
-    @ManyToOne
     @JoinColumn(name = "category_id")
     private PlateCategory category;
 }

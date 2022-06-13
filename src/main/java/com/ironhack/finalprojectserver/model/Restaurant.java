@@ -32,9 +32,9 @@ public class Restaurant {
     @JoinColumn(name = "user_id")
     private User user;
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<Plate> plates; // One restaurant can have many plates
+    private List<PlateCategory> plates; // One restaurant can have many plates categories
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<Drink> drinks; // One restaurant can have many drinks
+    private List<DrinkCategory> drinks; // One restaurant can have many drinks categories
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Employee> employees; // One restaurant can have many employees
 }

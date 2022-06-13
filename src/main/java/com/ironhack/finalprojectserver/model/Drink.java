@@ -19,14 +19,11 @@ public class Drink {
     private Long id;
     @NotEmpty(message = "Provide a name.")
     private String name;
+    @NotEmpty(message = "Provide information.")
     private String information;
     @NotNull(message = "Provide a price.")
     private double price;
     private String image;
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id")

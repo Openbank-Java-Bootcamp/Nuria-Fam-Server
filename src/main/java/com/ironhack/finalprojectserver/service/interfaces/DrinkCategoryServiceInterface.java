@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface DrinkCategoryServiceInterface {
     DrinkCategory saveDrinkCategory(DrinkCategoryDTO category);
-    List<DrinkCategory> getDrinkCategories();
+    List<DrinkCategory> getDrinkCategories(Long id);
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PlateCategoryServiceInterface {
     PlateCategory savePlateCategory(PlateCategoryDTO category);
-    List<PlateCategory> getPlateCategories();
+    List<PlateCategory> getPlateCategories(Long id);
 }

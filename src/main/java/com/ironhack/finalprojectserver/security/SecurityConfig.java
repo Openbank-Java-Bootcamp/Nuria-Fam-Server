@@ -48,10 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/auth/signup").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/restaurants").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/restaurants/{id}").permitAll();
-        http.authorizeRequests().antMatchers(GET,"/api/platecategory").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/api/{id}/platecategory").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/plates/{id}").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/plates/category/{id}").permitAll();
-        http.authorizeRequests().antMatchers(GET,"/api/drinkcategory").permitAll();
+        http.authorizeRequests().antMatchers(GET,"/api/{id}/drinkcategory").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/drinks/{id}").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/drinks/category/{id}").permitAll();
         http.authorizeRequests().anyRequest().authenticated();

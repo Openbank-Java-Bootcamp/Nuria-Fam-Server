@@ -12,6 +12,5 @@ public class DrinkDTO {
     private String information;
     private double price;
     private String image;
-    private Long restaurantId;
-    private Long category;
+    private Long drinkCategoryId;
 }

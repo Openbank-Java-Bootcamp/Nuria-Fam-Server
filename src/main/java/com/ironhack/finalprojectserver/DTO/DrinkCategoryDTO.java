@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DrinkCategoryDTO {
     private String name;
+    private Long restaurantId;
 }

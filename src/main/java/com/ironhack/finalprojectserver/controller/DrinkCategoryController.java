@@ -22,9 +22,9 @@ public class DrinkCategoryController {
         drinkCategoryService.saveDrinkCategory(category);
     }
 
-    @GetMapping("/drinkcategory")
+    @GetMapping("/{id}/drinkcategory")
     @ResponseStatus(HttpStatus.OK)
-    public List<DrinkCategory> getDrinkCategory() {
-        return drinkCategoryService.getDrinkCategories();
+    public List<DrinkCategory> getDrinkCategory(@PathVariable Long id) {
+        return drinkCategoryService.getDrinkCategories(id);
     }
 }

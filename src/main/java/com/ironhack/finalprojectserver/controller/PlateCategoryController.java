@@ -22,9 +22,9 @@ public class PlateCategoryController {
         plateCategoryService.savePlateCategory(category);
     }
 
-    @GetMapping("/platecategory")
+    @GetMapping("/{id}/platecategory")
     @ResponseStatus(HttpStatus.OK)
-    public List<PlateCategory> getPlateCategory() {
-        return plateCategoryService.getPlateCategories();
+    public List<PlateCategory> getPlateCategory(@PathVariable Long id) {
+        return plateCategoryService.getPlateCategories(id);
     }
 }

@@ -2,7 +2,6 @@ package com.ironhack.finalprojectserver.service.impl;
 
 import com.ironhack.finalprojectserver.DTO.PlateDTO;
 import com.ironhack.finalprojectserver.model.Plate;
-import com.ironhack.finalprojectserver.model.Restaurant;
 import com.ironhack.finalprojectserver.repository.PlateCategoryRepository;
 import com.ironhack.finalprojectserver.repository.PlateRepository;
 import com.ironhack.finalprojectserver.repository.RestaurantRepository;
@@ -43,8 +42,7 @@ public class PlateService implements PlateServiceInterface {
         newPlate.setIngredients(plate.getIngredients());
         newPlate.setPrice(plate.getPrice());
         newPlate.setImage(plate.getImage());
-        newPlate.setRestaurant(restaurantRepository.findById(plate.getRestaurantId()).get());
-        newPlate.setCategory(plateCategoryRepository.findById(plate.getCategory()).get());
+        newPlate.setCategory(plateCategoryRepository.findById(plate.getPlateCategoryId()).get());
         if (newPlate.getId() != null) {
             Optional<Plate> plateFromDB = plateRepository.findById(newPlate.getId());
             if (plateFromDB.isPresent())
@@ -60,8 +58,7 @@ public class PlateService implements PlateServiceInterface {
         newPlate.setIngredients(plate.getIngredients());
         newPlate.setPrice(plate.getPrice());
         newPlate.setImage(plate.getImage());
-        newPlate.setRestaurant(restaurantRepository.findById(plate.getRestaurantId()).get());
-        newPlate.setCategory(plateCategoryRepository.findById(plate.getCategory()).get());
+        newPlate.setCategory(plateCategoryRepository.findById(plate.getPlateCategoryId()).get());
         Plate plateFromDB = plateRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plate not found"));
         newPlate.setId(plateFromDB.getId());
         plateRepository.save(newPlate);
