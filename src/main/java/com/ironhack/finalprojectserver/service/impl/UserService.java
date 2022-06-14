@@ -62,6 +62,7 @@ public class UserService implements UserServiceInterface, UserDetailsService {
         User userFromDB = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         user.setId(userFromDB.getId());
         userRepository.save(user);
+        roleService.addRoleToUser(userSignupDTO.getEmail(), userSignupDTO.getRole().toUpperCase());
     }
 
     public void deleteUser(Long id) {
