@@ -34,7 +34,6 @@ public class User {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "role_id")
-    @NotNull(message = "Choose a role")
     private Role role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Restaurant> restaurants; // One user can have many restaurants
