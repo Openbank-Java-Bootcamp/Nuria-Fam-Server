@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 
@@ -46,6 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/auth/login/**").permitAll();
         http.authorizeRequests().antMatchers("/auth/signup").permitAll();
+
+        // Everyone can get the restaurants, plate categories, drink categories, plates, drinks and employees
         http.authorizeRequests().antMatchers(GET,"/api/restaurants").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/restaurants/{id}").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/{id}/platecategory").permitAll();
@@ -54,6 +56,43 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(GET,"/api/{id}/drinkcategory").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/drinks/{id}").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/drinks/category/{id}").permitAll();
+
+        // Everyone can get the ratings
+        http.authorizeRequests().antMatchers(GET,"/api/{id}/ratings").permitAll();
+
+        // Only the owner can add, update and delete restaurants, plate categories, drink categories, plates, drinks and employees
+        http.authorizeRequests().antMatchers(GET,"/api/restaurants/userid/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(POST, "/api/restaurants").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(PUT, "/api/restaurants/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(DELETE, "/api/restaurants/**").hasAnyAuthority("OWNER");
+
+        http.authorizeRequests().antMatchers(POST, "/api/platecategory").hasAnyAuthority("OWNER");
+
+        http.authorizeRequests().antMatchers(POST, "/api/drinkcategory").hasAnyAuthority("OWNER");
+
+        http.authorizeRequests().antMatchers(POST, "/api/plates").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(PUT, "/api/plates/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(DELETE, "/api/plates/**").hasAnyAuthority("OWNER");
+
+        http.authorizeRequests().antMatchers(POST, "/api/drinks").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(PUT, "/api/drinks/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(DELETE, "/api/drinks/**").hasAnyAuthority("OWNER");
+
+
+        http.authorizeRequests().antMatchers(GET, "/api/employees/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(GET, "/api/{id}/employees/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(POST, "/api/employees").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(PUT, "/api/employees/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(DELETE, "/api/employees/**").hasAnyAuthority("OWNER");
+
+        // Users and owners can get, update and delete a user
+        http.authorizeRequests().antMatchers(GET, "/api/users/**").hasAnyAuthority("OWNER", "USER");
+        http.authorizeRequests().antMatchers(PUT, "/api/users/**").hasAnyAuthority("OWNER", "USER");
+        http.authorizeRequests().antMatchers(DELETE, "/api/users/**").hasAnyAuthority("OWNER", "USER");
+
+        // Only users can rate a restaurant
+        http.authorizeRequests().antMatchers(POST, "/api/ratings").hasAnyAuthority("USER");
+
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
