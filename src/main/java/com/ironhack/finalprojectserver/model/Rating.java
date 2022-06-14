@@ -16,8 +16,6 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Pattern(regexp = "[1-5]+",
-            message = "Rate the restaurant")
     private int rating;
     @JsonIgnore
     @ManyToOne
