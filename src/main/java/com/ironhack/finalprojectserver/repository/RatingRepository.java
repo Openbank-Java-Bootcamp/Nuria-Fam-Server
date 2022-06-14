@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     @Query(value = "SELECT * FROM Rating INNER JOIN Restaurant ON rating.restaurant_id = restaurant.id WHERE restaurant.id = :id", nativeQuery = true)
-    List<Rating> findAllByRestaurant(@Param("id") Long id);
+    List<Rating> findAllByRestaurant(@Param("id") Long id); // Get ratings of one restaurant
 }

@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface PlateRepository extends JpaRepository<Plate, Long> {
     @Query(value = "SELECT * FROM Plate INNER JOIN plate_category ON plate.category_id = plate_category.id WHERE plate_category.id = :id", nativeQuery = true)
-    List<Plate> findByCategory(@Param("id") Long categoryId);
+    List<Plate> findByCategory(@Param("id") Long categoryId); // Get plates of one category
 }

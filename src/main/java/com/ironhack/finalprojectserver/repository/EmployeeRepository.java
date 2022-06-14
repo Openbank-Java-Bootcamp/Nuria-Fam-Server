@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(value = "SELECT * FROM Employee INNER JOIN Restaurant ON employee.restaurant_id = restaurant.id WHERE restaurant.id = :id", nativeQuery = true)
-    List<Employee> findAllByRestaurant(@Param("id") Long id);
+    List<Employee> findAllByRestaurant(@Param("id") Long id); // Get employees of one restaurant
 }
