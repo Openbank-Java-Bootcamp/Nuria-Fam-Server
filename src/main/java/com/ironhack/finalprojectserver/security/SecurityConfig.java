@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/auth/login/**").permitAll();
         http.authorizeRequests().antMatchers("/auth/signup").permitAll();
 
-        // Everyone can get the restaurants, plate categories, drink categories, plates, drinks and employees
+        // Everyone can get the restaurants, plate categories, drink categories, plates and drinks
         http.authorizeRequests().antMatchers(GET,"/api/restaurants").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/restaurants/{id}").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/{id}/platecategory").permitAll();
