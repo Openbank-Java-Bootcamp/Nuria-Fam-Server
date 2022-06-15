@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.cors();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().antMatchers("/auth/login/**").permitAll();
+        http.authorizeRequests().antMatchers("/auth/login").permitAll();
         http.authorizeRequests().antMatchers("/auth/signup").permitAll();
 
         // Everyone can get the restaurants, plate categories, drink categories, plates and drinks
