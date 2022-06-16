@@ -141,7 +141,7 @@ http://localhost:5005
 For future work I would like to create menus, like night menus, weekend menus, this way the owners would add plates and drinks and put a price for the menu.
 Add comments, so the users can add more feedback and the owners will know what they think about their restaurants.
 
-Also work on the design for the user experience and make it responsive, for mobiles and tablets.
+Also work on the design for the user experience and make it responsive, for mobiles and tablets and try to put the dark mode.
 
 ## Resources
 Link to the [Trello](https://trello.com/invite/b/dY098zTk/8f889a099ca009a7e1f5582c379e9d72/final-project) board.
