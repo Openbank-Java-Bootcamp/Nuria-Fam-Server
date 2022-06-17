@@ -61,37 +61,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(GET,"/api/{id}/ratings").permitAll();
 
         // Only the owner can add, update and delete restaurants, plate categories, drink categories, plates, drinks and employees
-        http.authorizeRequests().antMatchers(GET,"/api/restaurants/userid/**").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(POST, "/api/restaurants").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(PUT, "/api/restaurants/**").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(DELETE, "/api/restaurants/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(GET,"/api/restaurants/userid/**").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(POST, "/api/restaurants").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(PUT, "/api/restaurants/**").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(DELETE, "/api/restaurants/**").hasAnyAuthority("ROLE_OWNER");
 
-        http.authorizeRequests().antMatchers(POST, "/api/platecategory").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(POST, "/api/platecategory").hasAnyAuthority("ROLE_OWNER");
 
-        http.authorizeRequests().antMatchers(POST, "/api/drinkcategory").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(POST, "/api/drinkcategory").hasAnyAuthority("ROLE_OWNER");
 
-        http.authorizeRequests().antMatchers(POST, "/api/plates").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(PUT, "/api/plates/**").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(DELETE, "/api/plates/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(POST, "/api/plates").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(PUT, "/api/plates/**").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(DELETE, "/api/plates/**").hasAnyAuthority("ROLE_OWNER");
 
-        http.authorizeRequests().antMatchers(POST, "/api/drinks").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(PUT, "/api/drinks/**").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(DELETE, "/api/drinks/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(POST, "/api/drinks").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(PUT, "/api/drinks/**").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(DELETE, "/api/drinks/**").hasAnyAuthority("ROLE_OWNER");
 
 
-        http.authorizeRequests().antMatchers(GET, "/api/employees/**").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(GET, "/api/{id}/employees/**").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(POST, "/api/employees").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(PUT, "/api/employees/**").hasAnyAuthority("OWNER");
-        http.authorizeRequests().antMatchers(DELETE, "/api/employees/**").hasAnyAuthority("OWNER");
+        http.authorizeRequests().antMatchers(GET, "/api/employees/**").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(GET, "/api/{id}/employees/**").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(POST, "/api/employees").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(PUT, "/api/employees/**").hasAnyAuthority("ROLE_OWNER");
+        http.authorizeRequests().antMatchers(DELETE, "/api/employees/**").hasAnyAuthority("ROLE_OWNER");
 
         // Users and owners can get, update and delete a user
-        http.authorizeRequests().antMatchers(GET, "/api/users/**").hasAnyAuthority("OWNER", "USER");
-        http.authorizeRequests().antMatchers(PUT, "/api/users/**").hasAnyAuthority("OWNER", "USER");
-        http.authorizeRequests().antMatchers(DELETE, "/api/users/**").hasAnyAuthority("OWNER", "USER");
+        http.authorizeRequests().antMatchers(GET, "/api/users/**").hasAnyAuthority("ROLE_OWNER", "ROLE_USER");
+        http.authorizeRequests().antMatchers(PUT, "/api/users/**").hasAnyAuthority("ROLE_OWNER", "ROLE_USER");
+        http.authorizeRequests().antMatchers(DELETE, "/api/users/**").hasAnyAuthority("ROLE_OWNER", "ROLE_USER");
 
         // Only users can rate a restaurant
-        http.authorizeRequests().antMatchers(POST, "/api/ratings").hasAnyAuthority("USER");
+        http.authorizeRequests().antMatchers(POST, "/api/ratings").hasAnyAuthority("ROLE_USER");
 
         http.authorizeRequests().antMatchers("/", "/csrf", "/v2/api-docs", "/swagger-resources/configuration/ui", "/configuration/ui", "/swagger-resources", "/swagger-resources/configuration/security", "/configuration/security", "/swagger-ui.html", "/webjars/**").permitAll();
 
